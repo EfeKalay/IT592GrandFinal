@@ -1,5 +1,7 @@
 package edu.sabanciuniv.ipamdemo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,10 +19,12 @@ public class Network {
     @Column(name = "Description")
     private  String description;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "network", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<IpAddress> ipAddresses;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "division_id", nullable = false)
     private Division division;
 
