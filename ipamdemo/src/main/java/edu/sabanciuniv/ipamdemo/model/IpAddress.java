@@ -1,5 +1,7 @@
 package edu.sabanciuniv.ipamdemo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +16,7 @@ public class IpAddress {
     @Column(name = "IPAddress", nullable = false)
     private String ip;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "ipAddress", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Port> ports;
 
@@ -23,6 +26,7 @@ public class IpAddress {
     @Column(name = "HostName", nullable = false)
     private String hostName;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "network_id", nullable = false)
     private Network network;

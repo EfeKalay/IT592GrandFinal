@@ -1,5 +1,7 @@
 package edu.sabanciuniv.ipamdemo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class Division {
     @Column(name = "Description")
     private  String description;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "division", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Network> networks;
 
