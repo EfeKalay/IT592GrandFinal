@@ -37,11 +37,20 @@ public class NetworkResource {
         return new ResponseEntity<ServiceResponse>(response, response.getStatus());
     }
 
-    @GetMapping("/assignNetwork")
-    public ResponseEntity<ServiceResponse> assignNetworkToDiv(@RequestParam Long divisionId, @RequestParam Long networkId){
+    @GetMapping("/carryNetwork")
+    public ResponseEntity<ServiceResponse> carryNetworkToDiv(@RequestParam Long divisionId, @RequestParam Long networkId){
 
-        //todo
-        ServiceResponse response = networkService.assignNetwork(divisionId,networkId);
+        
+        ServiceResponse response = networkService.carryNetwork(divisionId,networkId);
+
+        return new ResponseEntity<ServiceResponse>(response, response.getStatus());
+    }
+    
+    @GetMapping("/assignNetwork")
+    public ResponseEntity<ServiceResponse> assignNetworkToDiv(@RequestParam Long divId, @RequestParam String cidr, @RequestParam String name, @RequestParam String description){
+
+        
+        ServiceResponse response = networkService.assignNetwork(divId, cidr, name, description);
 
         return new ResponseEntity<ServiceResponse>(response, response.getStatus());
     }

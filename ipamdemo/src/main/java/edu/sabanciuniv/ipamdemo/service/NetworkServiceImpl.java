@@ -29,6 +29,9 @@ public class NetworkServiceImpl implements NetworkService{
     @Autowired
     DivisionRepository divisionRepository;
 
+    @Autowired
+    IpRepository ipRepository;
+
     @Override
     public ServiceResponse getAll() {
         try{
@@ -58,17 +61,26 @@ public class NetworkServiceImpl implements NetworkService{
             Network network = new Network(newNetworkRequest.getName(), newNetworkRequest.getDescription(), new ArrayList<>(), divAdministration);
 
             for(String ip : ipStringList){
-                IpAddress ipAddress = new IpAddress();
-                ipAddress.setIp(ip);
-                ipAddress.setNetwork(network);
-                ipAddress.setStatus("inactive");
-                ipAddress.setHostName("Default");
-                ipAddress.setLastModifDate(new Date());
-                List<Port> ports = new ArrayList<>();
-                ipAddress.setPorts(ports);
-                ipAddressList.add(ipAddress);
-                ipAddress.setOperatingSystem("NA");
-                ipAddressList.add(ipAddress);
+
+                boolean isExist = ipRepository.existsIpAddressByIp(ip);
+
+                if(isExist){
+                    return ServiceResponse.defaultInternalError("IP Address ("+ ip +") is already exist!");
+                }else{
+
+                    IpAddress ipAddress = new IpAddress();
+                    ipAddress.setIp(ip);
+                    ipAddress.setNetwork(network);
+                    ipAddress.setStatus("inactive");
+                    ipAddress.setHostName("Default");
+                    ipAddress.setLastModifDate(new Date());
+                    List<Port> ports = new ArrayList<>();
+                    ipAddress.setPorts(ports);
+                    ipAddressList.add(ipAddress);
+                    ipAddress.setOperatingSystem("NA");
+                    ipAddressList.add(ipAddress);
+                }
+
             }
 
             network.setIpAddresses(ipAddressList);
@@ -83,7 +95,7 @@ public class NetworkServiceImpl implements NetworkService{
 
 
     @Override
-    public ServiceResponse assignNetwork(Long divId, Long netId) {
+    public ServiceResponse carryNetwork(Long divId, Long netId) {
         try{
             //todo tamamlanacak
             Division newDivision = divisionRepository.getById(divId);
@@ -97,6 +109,31 @@ public class NetworkServiceImpl implements NetworkService{
         }catch(Exception e){
 
             return ServiceResponse.defaultInternalError("Internal Error caused by: Cannot assign Network[ "+ netId +" ] to Division[ " + divId + " ] DB!");
+        }
+    }
+
+    @Override
+    public ServiceResponse assignNetwork(Long divId, String cidr, String name, String description) {
+        try{
+            //todo tamamlanacak
+            Division newDivision = divisionRepository.getById(divId);
+            Network network = new Network(name, description, new ArrayList<IpAddress>(), newDivision);
+            Network baseNetwork = networkRepository.findByName("Base");
+            List<IpAddress> baseNetIpList = baseNetwork.getIpAddresses();
+            int ipCount = (int) Math.pow(2,(32-Integer.valueOf(cidr.substring(1))));
+            if(baseNetIpList.size() >=  ipCount){
+                for (int i = 0; i < ipCount; i++) {
+                    IpAddress ip = baseNetIpList.get(i);
+                    network.getIpAddresses().add(ip);
+                }
+            }
+            networkRepository.save(network);
+
+            ServiceResponse response = new ServiceResponse(HttpStatus.OK,"Network has been assigned successfully!", network);
+            return response;
+        }catch(Exception e){
+
+            return ServiceResponse.defaultInternalError("Internal Error caused by: Cannot assign Network[ " + name +" ] to Division[ " + divId + " ] DB!");
         }
     }
 

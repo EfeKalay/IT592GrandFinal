@@ -14,7 +14,10 @@ public interface NetworkRepository extends JpaRepository<Network, Long> {
 
     Network getById(Long id);
 
+    Network findByName(String name);
+
     List<Network> findAll();
+
 
     @Override
     <S extends Network> List<S> saveAll(Iterable<S> iterable);

@@ -23,7 +23,6 @@ public class NetworkUtils {
         SubnetUtils utils = new SubnetUtils(cidr);
         String[] ipAddressArray = utils.getInfo().getAllAddresses();
 
-        System.out.println(ipAddressArray[2]);
 
         return Arrays.asList(ipAddressArray.clone());
     }

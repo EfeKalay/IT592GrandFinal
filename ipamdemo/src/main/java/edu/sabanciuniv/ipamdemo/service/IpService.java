@@ -21,4 +21,6 @@ public interface IpService {
     List<IpAddress> getListFromMask(String address, String mask, Network network);
 
     ServiceResponse getAllIpAddresses();
+
+    ServiceResponse getNetworksIp(Long netId);
 }

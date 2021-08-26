@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.logging.Logger;
@@ -28,5 +29,15 @@ public class IpAddressResource {
 
         return  new ResponseEntity<ServiceResponse>(response, response.getStatus());
     }
+
+    @GetMapping("/getNetIps")
+    public ResponseEntity<ServiceResponse> getNetIps(@RequestParam Long netId){
+
+        ServiceResponse response = ipService.getNetworksIp(netId);
+
+        return  new ResponseEntity<ServiceResponse>(response, response.getStatus());
+    }
+
+
 
 }

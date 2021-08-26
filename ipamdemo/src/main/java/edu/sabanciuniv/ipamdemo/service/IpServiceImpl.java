@@ -1,6 +1,5 @@
 package edu.sabanciuniv.ipamdemo.service;
 
-
 import edu.sabanciuniv.ipamdemo.dto.ServiceResponse;
 import edu.sabanciuniv.ipamdemo.model.IpAddress;
 import edu.sabanciuniv.ipamdemo.model.Network;
@@ -26,6 +25,13 @@ public class IpServiceImpl implements IpService {
     public ServiceResponse getAllIpAddresses() {
 
         ServiceResponse response = new ServiceResponse(HttpStatus.OK, "Success",ipRepository.findAll());
+        return response;
+    }
+
+    @Override
+    public ServiceResponse getNetworksIp(Long netId) {
+
+        ServiceResponse response = new ServiceResponse(HttpStatus.OK,"Success", ipRepository.findByNetwork_Id(netId));
         return response;
     }
 

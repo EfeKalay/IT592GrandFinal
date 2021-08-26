@@ -17,6 +17,8 @@ public interface IpRepository extends JpaRepository<IpAddress,Long> {
 
     List<IpAddress> findByNetwork_Division_Id(Long divId);
 
+    Boolean existsIpAddressByIp(String ip);
+
 
 
 
