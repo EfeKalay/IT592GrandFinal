@@ -23,4 +23,6 @@ public interface IpService {
     ServiceResponse getAllIpAddresses();
 
     ServiceResponse getNetworksIp(Long netId);
+
+    ServiceResponse getAllIps(int pageNum);
 }

@@ -10,7 +10,7 @@ public class Port {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="ipAddress_id", nullable = false)
+    @JoinColumn(name="ipAddress_id", referencedColumnName = "id", nullable = false)
     private IpAddress ipAddress;
 
     @Column(name = "PortNumber", nullable = false)

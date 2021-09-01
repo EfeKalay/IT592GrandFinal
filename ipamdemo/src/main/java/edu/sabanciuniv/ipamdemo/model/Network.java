@@ -23,7 +23,7 @@ public class Network {
     private List<IpAddress> ipAddresses;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="division_id", nullable=false)
+    @JoinColumn(name="division_id", referencedColumnName = "id", nullable=false)
     private Division division;
 
 
