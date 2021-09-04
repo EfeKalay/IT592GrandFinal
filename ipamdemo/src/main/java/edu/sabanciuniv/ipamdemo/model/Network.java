@@ -19,14 +19,13 @@ public class Network {
     @Column(name = "Description")
     private  String description;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "network", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<IpAddress> ipAddresses;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "division_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="division_id", referencedColumnName = "id", nullable=false)
     private Division division;
+
 
     public Network() {
     }

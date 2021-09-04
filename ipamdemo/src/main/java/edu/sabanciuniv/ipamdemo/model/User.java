@@ -1,38 +1,43 @@
 package edu.sabanciuniv.ipamdemo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.util.Date;
+import javax.validation.constraints.Size;
 
+@Entity
+@Table(name = "User")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private int id;
+    @Size(min = 4,max = 255, message = "Minimum username length: 4 characters")
+    @Column(unique = true, nullable = false)
     private String username;
+
+    @JsonIgnore
+    @Size(min = 8, message = "Minimum username length: 4 characters")
     private String password;
-    private Division div;
-    private String firstName;
-    private String lastName;
-    private boolean status;
+
+    @Column(name = "last_login")
     private Date lastLogin;
-    private String role;
 
     public User() {
     }
 
-    public User(String username, String password, Division div, String firstName, String lastName, boolean status, Date lastLogin, String role) {
+    public User(String username, String password, Date lastLogin) {
         this.username = username;
         this.password = password;
-        this.div = div;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.status = status;
         this.lastLogin = lastLogin;
-        this.role = role;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,52 +57,12 @@ public class User {
         this.password = password;
     }
 
-    public Division getDiv() {
-        return div;
-    }
-
-    public void setDiv(Division div) {
-        this.div = div;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
     public Date getLastLogin() {
         return lastLogin;
     }
 
     public void setLastLogin(Date lastLogin) {
         this.lastLogin = lastLogin;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
 
@@ -107,12 +72,7 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", div=" + div +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", status=" + status +
                 ", lastLogin=" + lastLogin +
-                ", role='" + role + '\'' +
                 '}';
     }
 }

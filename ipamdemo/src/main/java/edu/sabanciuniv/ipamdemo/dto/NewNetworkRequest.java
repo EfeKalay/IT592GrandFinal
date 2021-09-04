@@ -7,16 +7,18 @@ public class NewNetworkRequest {
     private String address;
     private String mask;
     private String cidr;
+    private Long divId;
 
     public NewNetworkRequest() {
     }
 
-    public NewNetworkRequest(String name, String description, String address, String mask, String cidr) {
+    public NewNetworkRequest(String name, String description, String address, String mask, String cidr, Long divId) {
         this.name = name;
         this.description = description;
         this.address = address;
         this.mask = mask;
         this.cidr = cidr;
+        this.divId = divId;
     }
 
     public String getName() {
@@ -57,5 +59,13 @@ public class NewNetworkRequest {
 
     public void setCidr(String cidr) {
         this.cidr = cidr;
+    }
+
+    public Long getDivId() {
+        return divId;
+    }
+
+    public void setDivId(Long divId) {
+        this.divId = divId;
     }
 }

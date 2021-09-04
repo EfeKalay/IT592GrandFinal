@@ -28,7 +28,7 @@ public class IpAddress {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "network_id", nullable = false)
+    @JoinColumn(name = "network_id", referencedColumnName = "id", nullable = false)
     private Network network;
 
     @Column(name = "LastModified", nullable = false)

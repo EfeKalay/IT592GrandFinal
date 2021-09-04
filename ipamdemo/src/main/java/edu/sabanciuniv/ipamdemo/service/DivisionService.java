@@ -13,5 +13,4 @@ public interface DivisionService {
 
     ServiceResponse getDivisionNetworks(Long id);
 
-    ServiceResponse revokeDivNetwork(Long netId, Long divId);
 }
