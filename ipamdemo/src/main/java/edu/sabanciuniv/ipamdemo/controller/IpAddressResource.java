@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/ip")
+@RequestMapping("/secure/ip")
 public class IpAddressResource {
 
 
@@ -49,10 +49,19 @@ public class IpAddressResource {
     public ResponseEntity<ServiceResponse> getNetIps(){
 
         ServiceResponse response = null;
-        NetworkUtils.getIpDetails("hıdıdı");
+        NetworkUtils.getHostName("hıdıdı");
         NetworkUtils.getPortDetails("94.138.200.20");
         return  null;
     }
+
+    @GetMapping("/syncIpInfo")
+    public ResponseEntity<ServiceResponse> syncIp(@RequestParam Long id){
+
+        ServiceResponse response = ipService.syncIp(id);
+        return  new ResponseEntity<ServiceResponse>(response, response.getStatus());
+    }
+
+
 
 
 

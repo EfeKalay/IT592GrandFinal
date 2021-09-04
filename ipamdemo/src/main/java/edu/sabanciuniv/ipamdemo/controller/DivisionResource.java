@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/division")
+@RequestMapping("/secure/division")
 public class DivisionResource {
 
     private static final Logger LOG = Logger.getLogger(DivisionResource.class.getName());

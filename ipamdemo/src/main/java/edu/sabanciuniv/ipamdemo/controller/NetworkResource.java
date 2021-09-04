@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/network")
+@RequestMapping("/secure/network")
 public class NetworkResource {
     private static final Logger LOG = Logger.getLogger(NetworkResource.class.getName());
 

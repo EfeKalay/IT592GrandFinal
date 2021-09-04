@@ -21,28 +21,15 @@ public class User {
     @Size(min = 8, message = "Minimum username length: 4 characters")
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "division_id", referencedColumnName = "id")
-    private Division div;
-
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
-
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
-
     @Column(name = "last_login")
     private Date lastLogin;
 
     public User() {
     }
 
-    public User(String username, String password, Division div, String firstName, String lastName, Date lastLogin) {
+    public User(String username, String password, Date lastLogin) {
         this.username = username;
         this.password = password;
-        this.div = div;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.lastLogin = lastLogin;
     }
 
@@ -70,30 +57,6 @@ public class User {
         this.password = password;
     }
 
-    public Division getDiv() {
-        return div;
-    }
-
-    public void setDiv(Division div) {
-        this.div = div;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public Date getLastLogin() {
         return lastLogin;
     }
@@ -109,9 +72,6 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", div=" + div +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
                 ", lastLogin=" + lastLogin +
                 '}';
     }
