@@ -61,8 +61,18 @@ public class IpAddressResource {
         return  new ResponseEntity<ServiceResponse>(response, response.getStatus());
     }
 
+    @GetMapping("/getNumberOfAvIps")
+    public ResponseEntity<ServiceResponse> getNumberOfAvIps(){
 
+        ServiceResponse response = ipService.getNumberOfAvIps();
+        return new ResponseEntity<ServiceResponse>(response, response.getStatus());
+    }
 
+    @GetMapping("/getNumberOfUnIps")
+    public ResponseEntity<ServiceResponse> getNumberOfUnIps(){
 
+        ServiceResponse response = ipService.getNumberOfUnIps();
+        return new ResponseEntity<ServiceResponse>(response, response.getStatus());
+    }
 
 }

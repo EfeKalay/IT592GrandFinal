@@ -27,4 +27,8 @@ public interface IpService {
     ServiceResponse getAllIps(int pageNum);
 
     ServiceResponse syncIp(Long id);
+
+    ServiceResponse getNumberOfAvIps();
+
+    ServiceResponse getNumberOfUnIps();
 }

@@ -65,6 +65,18 @@ public class IpServiceImpl implements IpService {
     }
 
     @Override
+    public ServiceResponse getNumberOfAvIps() {
+        ServiceResponse response = new ServiceResponse(HttpStatus.OK,"Successfully", ipRepository.getAvailableIpAddressCount());
+        return response;
+    }
+
+    @Override
+    public ServiceResponse getNumberOfUnIps() {
+        ServiceResponse response = new ServiceResponse(HttpStatus.OK,"Successfully", ipRepository.getUnavailableIpAddressCount());
+        return response;
+    }
+
+    @Override
     public ServiceResponse getNetworksIp(Long netId) {
 
         ServiceResponse response = new ServiceResponse(HttpStatus.OK,"Success", ipRepository.getIpsByNetId(netId, PageRequest.of(0,250)));
