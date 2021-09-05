@@ -24,6 +24,12 @@ public interface IpRepository extends JpaRepository<IpAddress,Long> {
             "from IpAddress i where i.network.id = :netId ORDER BY i.id asc")
     List<IpInfoDTO> getIpsByNetId(@Param("netId") Long networkId, Pageable pageable);
 
+    @Query(value = "select count(*) from IpAddress i where i.status = 'Available'")
+    Long getAvailableIpAddressCount();
+
+    @Query(value = "select count(*) from IpAddress i where i.status = 'Unavailable'")
+    Long getUnavailableIpAddressCount();
+
     Boolean existsIpAddressByIp(String ip);
 
 

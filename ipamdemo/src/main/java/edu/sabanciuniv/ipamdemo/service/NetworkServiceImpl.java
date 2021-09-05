@@ -60,6 +60,12 @@ public class NetworkServiceImpl implements NetworkService{
             return ServiceResponse.defaultInternalError("Internal Error caused by: Cannot fetch network list from DB!");
         }
     }
+
+    @Override
+    public ServiceResponse getNumberOfNetwork() {
+        return new ServiceResponse(HttpStatus.OK, "Success", networkRepository.count());
+    }
+
     @Override
     public ServiceResponse createNetwork(NewNetworkRequest newNetworkRequest) {
 

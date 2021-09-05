@@ -13,4 +13,5 @@ public interface DivisionService {
 
     ServiceResponse getDivisionNetworks(Long id);
 
+    ServiceResponse getNumberOfDivision();
 }

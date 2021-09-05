@@ -19,4 +19,6 @@ public interface NetworkService {
     ServiceResponse deleteNetwork(Long id);
 
     ServiceResponse getNetworkListByDiv(Long id);
+
+    ServiceResponse getNumberOfNetwork();
 }

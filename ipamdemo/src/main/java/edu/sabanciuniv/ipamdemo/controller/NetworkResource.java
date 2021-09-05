@@ -81,6 +81,13 @@ public class NetworkResource {
         return new ResponseEntity<ServiceResponse>(response, response.getStatus());
     }
 
+    @GetMapping("/getNumberOfNetworks")
+    public ResponseEntity<ServiceResponse> getNumberOfNetworks(){
+
+        ServiceResponse response = networkService.getNumberOfNetwork();
+        return new ResponseEntity<ServiceResponse>(response, response.getStatus());
+    }
+
 
 
 

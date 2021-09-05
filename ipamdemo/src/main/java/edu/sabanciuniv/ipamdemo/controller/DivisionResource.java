@@ -49,6 +49,11 @@ public class DivisionResource {
         return  new ResponseEntity<ServiceResponse>(response, response.getStatus());
     }
 
+    @GetMapping("/getNumberOfDivisions")
+    public ResponseEntity<ServiceResponse> getNumberOfDivisions(){
 
+        ServiceResponse response = divisionService.getNumberOfDivision();
+        return new ResponseEntity<ServiceResponse>(response, response.getStatus());
+    }
 
 }

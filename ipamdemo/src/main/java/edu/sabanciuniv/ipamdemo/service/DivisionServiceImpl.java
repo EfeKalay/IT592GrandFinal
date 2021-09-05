@@ -60,4 +60,10 @@ public class DivisionServiceImpl implements DivisionService {
         return response;
     }
 
+    @Override
+    public ServiceResponse getNumberOfDivision() {
+
+        return new ServiceResponse(HttpStatus.OK, "Success", divisionRepository.count());
+    }
+
 }
