@@ -36,10 +36,17 @@ public class DivisionResource {
     @PostMapping("/create")
     public ResponseEntity<ServiceResponse> createNewDivision(@RequestBody NewDivRequest divRequest){
 
-        //todo
         ServiceResponse response = divisionService.createDivision(divRequest);
 
         return new ResponseEntity<ServiceResponse>(response, response.getStatus());
+    }
+
+    @GetMapping("/delete")
+    public ResponseEntity<ServiceResponse> deleteDivision(@RequestParam Long id){
+
+        ServiceResponse response = divisionService.deleteDivision(id);
+
+        return  new ResponseEntity<ServiceResponse>(response, response.getStatus());
     }
 
 
