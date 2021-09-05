@@ -88,7 +88,8 @@ public class IpServiceImpl implements IpService {
         for (String ip:stringIpList) {
             ipAddressList.add(new IpAddress(ip,
                     portList,
-                    "Default",
+                    "Available" +
+                            "",
                     "No hostName",
                     network,
                     new Date(),
