@@ -10,4 +10,8 @@ public interface UserService {
     ServiceResponse signin(String username, String password);
 
     ServiceResponse signup(UserDataDTO userData);
+
+    ServiceResponse getAllUsers();
+
+    ServiceResponse deleteUser(Long id);
 }
