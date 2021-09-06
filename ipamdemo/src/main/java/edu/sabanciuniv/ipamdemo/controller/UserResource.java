@@ -1,6 +1,7 @@
 package edu.sabanciuniv.ipamdemo.controller;
 
 import edu.sabanciuniv.ipamdemo.dto.ServiceResponse;
+import edu.sabanciuniv.ipamdemo.dto.UserDataDTO;
 import edu.sabanciuniv.ipamdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,13 @@ public class UserResource {
 
         ServiceResponse response = userService.deleteUser(id);
 
+        return  new ResponseEntity<ServiceResponse>(response, response.getStatus());
+    }
+
+    @PostMapping(path = "/createUser")
+    public ResponseEntity<ServiceResponse> createUser(@RequestBody UserDataDTO userData){
+
+        ServiceResponse response = userService.signup(userData);
         return  new ResponseEntity<ServiceResponse>(response, response.getStatus());
     }
 }

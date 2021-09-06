@@ -26,10 +26,11 @@ public class Login {
         return  new ResponseEntity<ServiceResponse>(response, response.getStatus());
     }
 
-    @PostMapping(path = "/signup")
+    //TODO kurulumda ilk user oluşturmak için kullanılır.
+   /* @PostMapping(path = "/signup")
     public ResponseEntity<ServiceResponse> createUser(@RequestBody UserDataDTO userData){
 
         ServiceResponse response = userService.signup(userData);
         return  new ResponseEntity<ServiceResponse>(response, response.getStatus());
-    }
+    }*/
 }
