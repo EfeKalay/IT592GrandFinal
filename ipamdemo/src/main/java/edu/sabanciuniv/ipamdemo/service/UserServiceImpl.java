@@ -9,6 +9,7 @@ import edu.sabanciuniv.ipamdemo.repository.UserRepository;
 import edu.sabanciuniv.ipamdemo.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -61,5 +62,21 @@ public class UserServiceImpl implements UserService{
         }else{
             throw new CustomException("email is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
         }
+    }
+
+    @Override
+    public ServiceResponse getAllUsers() {
+        LOG.info("fetching users getAllUsers() started");
+        ServiceResponse response = new ServiceResponse(HttpStatus.OK, "User List fetched successfully",userRepository.findAll());
+        LOG.info("Users List fetched successfully");
+        return response;
+    }
+
+    @Override
+    public ServiceResponse deleteUser(Long id) {
+        LOG.info("Delete user process has been started");
+        userRepository.deleteById(id);
+        LOG.info("Removing user process has been finished successfully");
+        return new ServiceResponse(HttpStatus.OK,"User removed successfully", null);
     }
 }
