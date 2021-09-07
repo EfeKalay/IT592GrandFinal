@@ -87,8 +87,8 @@ public class NetworkServiceImpl implements NetworkService{
                     IpAddress ipAddress = new IpAddress();
                     ipAddress.setIp(ip);
                     ipAddress.setNetwork(network);
-                    ipAddress.setStatus("Unavailable");
-                    ipAddress.setHostName("Default");
+                    ipAddress.setStatus(NetworkUtils.isIpReachable(ip));
+                    ipAddress.setHostName(NetworkUtils.getHostName(ip));
                     ipAddress.setLastModifDate(new Date());
                     List<Port> ports = new ArrayList<>();
                     ipAddress.setPorts(ports);

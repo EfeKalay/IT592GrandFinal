@@ -36,44 +36,33 @@ public class NetworkUtils {
         //ipaddress = "85.111.30.111";
         try {
             InetAddress remote = InetAddress.getByName(ipaddress);
-            if(remote.isReachable(1000))
-                System.out.println("IP Address ["+ipaddress+"]  is Unavailable");
-            else
-                System.out.println("IP Address ["+ipaddress+"]  is Available");
-
             String hostName = remote.getHostName();
             LOG.info("Hostname:   " +hostName);
             return hostName;
         } catch (UnknownHostException e) {
             e.printStackTrace();
             return "Hostname unavailable";
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "Hostname unavailable";
         }
     }
 
     public static String isIpReachable(String ipaddress){
-        try{
-            InetAddress remote = InetAddress.getByName(ipaddress);
-            if(remote.isReachable(1000)){
-                LOG.info("IP Address ["+ipaddress+"]  is Unavailable");
+        int[] ports = {21, 22, 25, 53, 80, 110, 143, 443, 587, 3306, 1433};
+        for (int port : ports) {
+            try {
+                Socket socket = new Socket();
+                socket.connect(new InetSocketAddress(ipaddress, port), 100);
+                socket.close();
+                LOG.info("IP Address ["+ipaddress+"] Port " + port + " is OPEN");
                 return "Unavailable";
-            }else{
-                LOG.info("IP Address ["+ipaddress+"]  is Available");
-                return "Available";
+            } catch (Exception ex) {
+                LOG.info("IP Address ["+ipaddress+"] Port " + port + " is CLOSE");
             }
-
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-            return null;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
         }
+        return "Available";
+
     }
 
-    public static LinkedHashMap<String, List<Integer>> getPortDetails(String ipaddress){
+    public static LinkedHashMap<String, Object> getPortDetails(String ipaddress){
 
         int[] ports = {21, 22, 25, 53, 80, 110, 143, 443, 587, 3306, 1433};
         List<Integer> openPortList = new ArrayList<>();
@@ -92,7 +81,7 @@ public class NetworkUtils {
             }
         }
 
-        LinkedHashMap<String, List<Integer>> portDetails = new LinkedHashMap<>();
+        LinkedHashMap<String, Object> portDetails = new LinkedHashMap<>();
         portDetails.put("open", openPortList);
         portDetails.put("close", closedPortList);
 

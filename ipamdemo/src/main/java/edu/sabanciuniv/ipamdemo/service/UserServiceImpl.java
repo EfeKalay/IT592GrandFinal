@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService{
             User currentUser = userRepository.findByUsername(username);
             String token = jwtTokenProvider.createToken(username);
             ServiceResponse response = new ServiceResponse(HttpStatus.OK, "Token created", token);
+            LOG.info("User "+ username +" signed in.");
             return response;
         } catch (AuthenticationException e){
             LOG.severe(e.getMessage());
@@ -58,6 +59,7 @@ public class UserServiceImpl implements UserService{
             userRepository.save(newUser);
             String token = jwtTokenProvider.createToken(newUser.getUsername());
             ServiceResponse response = new ServiceResponse(HttpStatus.OK, "Token created", token);
+            LOG.info("User "+ user.getUsername() +" signed up.");
             return response;
         }else{
             throw new CustomException("email is already in use", HttpStatus.UNPROCESSABLE_ENTITY);

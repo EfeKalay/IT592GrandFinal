@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IpService {
 
-    ServiceResponse getPortsInfo(Long ipId);
+    ServiceResponse getIpDetailsInfo(Long ipId);
 
     //ServiceResponse setServiceToPort(Long ipId, Long portNum, String serviceName, boolean status);
 

@@ -21,7 +21,6 @@ public class Login {
 
     @PostMapping(path = "/signin")
     public ResponseEntity<ServiceResponse> signin(@RequestBody UserDataDTO userData){
-
         ServiceResponse response = userService.signin(userData.getUsername(), userData.getPassword());
         return  new ResponseEntity<ServiceResponse>(response, response.getStatus());
     }
@@ -33,4 +32,11 @@ public class Login {
         ServiceResponse response = userService.signup(userData);
         return  new ResponseEntity<ServiceResponse>(response, response.getStatus());
     }*/
+
+    @GetMapping(path = "/createSystemUser")
+    public ResponseEntity<ServiceResponse> createUser(){
+         UserDataDTO userData = new UserDataDTO("system","12345678");
+         ServiceResponse response = userService.signup(userData);
+         return  new ResponseEntity<ServiceResponse>(response, response.getStatus());
+    }
 }

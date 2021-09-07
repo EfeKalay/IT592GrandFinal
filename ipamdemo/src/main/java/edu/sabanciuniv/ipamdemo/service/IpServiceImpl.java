@@ -84,10 +84,12 @@ public class IpServiceImpl implements IpService {
     }
 
     @Override
-    public ServiceResponse getPortsInfo(Long ipId) {
+    public ServiceResponse getIpDetailsInfo(Long ipId) {
         String ipAddress = ipRepository.getById(ipId).getIp();
-        LinkedHashMap<String, List<Integer>> portInfoMap = NetworkUtils.getPortDetails(ipAddress);
-        return new ServiceResponse(HttpStatus.OK, "Ports info for "+ipAddress+" is SUCCESSFUL",portInfoMap);
+        IpInfoDTO ipInfo = ipRepository.getIpDetails(ipId);
+        LinkedHashMap<String, Object> ipInfoMap = NetworkUtils.getPortDetails(ipAddress);
+        ipInfoMap.put("info",ipInfo);
+        return new ServiceResponse(HttpStatus.OK, "Ports info for "+ipAddress+" is SUCCESSFUL",ipInfoMap);
     }
 
 

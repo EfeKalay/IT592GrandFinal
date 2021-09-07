@@ -23,55 +23,57 @@ public class IpAddressResource {
 
     @GetMapping("/getAll")
     public ResponseEntity<ServiceResponse> getAll(){
-
+        LOG.info("getAll() called");
         ServiceResponse response = ipService.getAllIpAddresses();
-
+        LOG.info("getAll() returned");
         return  new ResponseEntity<ServiceResponse>(response, response.getStatus());
     }
 
     @GetMapping("/getAllIps")
     public ResponseEntity<ServiceResponse> getNetIps( @RequestParam int page){
-
+        LOG.info("getAllIps("+page+") called");
         ServiceResponse response = ipService.getAllIps(page);
-
+        LOG.info("getAllIps("+page+") returned");
         return  new ResponseEntity<ServiceResponse>(response, response.getStatus());
     }
 
     @GetMapping("/getNetIps")
     public ResponseEntity<ServiceResponse> getNetIps(@RequestParam Long id){
-
+        LOG.info("getNetIps("+id+") called");
         ServiceResponse response = ipService.getNetworksIp(id);
-
+        LOG.info("getNetIps("+id+") returned");
         return  new ResponseEntity<ServiceResponse>(response, response.getStatus());
     }
 
     @GetMapping("/getIpDetails")
-    public ResponseEntity<ServiceResponse> getNetIps(){
-
-        ServiceResponse response = null;
-        NetworkUtils.getHostName("hıdıdı");
-        NetworkUtils.getPortDetails("94.138.200.20");
-        return  null;
+    public ResponseEntity<ServiceResponse> getIpDetails(@RequestParam Long id){
+        LOG.info("getIpDetails("+id+") called");
+        ServiceResponse response = ipService.getIpDetailsInfo(id);
+        LOG.info("getIpDetails("+id+") returned");
+        return new ResponseEntity<ServiceResponse>(response, response.getStatus());
     }
 
     @GetMapping("/syncIpInfo")
     public ResponseEntity<ServiceResponse> syncIp(@RequestParam Long id){
-
+        LOG.info("syncIp("+id+") called");
         ServiceResponse response = ipService.syncIp(id);
+        LOG.info("syncIp("+id+") returned");
         return  new ResponseEntity<ServiceResponse>(response, response.getStatus());
     }
 
     @GetMapping("/getNumberOfAvIps")
     public ResponseEntity<ServiceResponse> getNumberOfAvIps(){
-
+        LOG.info("getNumberOfAvIps() called");
         ServiceResponse response = ipService.getNumberOfAvIps();
+        LOG.info("getNumberOfAvIps() returned");
         return new ResponseEntity<ServiceResponse>(response, response.getStatus());
     }
 
     @GetMapping("/getNumberOfUnIps")
     public ResponseEntity<ServiceResponse> getNumberOfUnIps(){
-
+        LOG.info("getNumberOfUnIps() called");
         ServiceResponse response = ipService.getNumberOfUnIps();
+        LOG.info("getNumberOfUnIps() returned");
         return new ResponseEntity<ServiceResponse>(response, response.getStatus());
     }
 
