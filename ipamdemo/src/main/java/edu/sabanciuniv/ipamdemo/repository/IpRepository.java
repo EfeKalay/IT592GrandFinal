@@ -30,6 +30,10 @@ public interface IpRepository extends JpaRepository<IpAddress,Long> {
     @Query(value = "select count(*) from IpAddress i where i.status = 'Unavailable'")
     Long getUnavailableIpAddressCount();
 
+    @Query(value = "select new edu.sabanciuniv.ipamdemo.dto.IpInfoDTO(i.status, i.ip, i.hostName, i.id) " +
+            "from IpAddress i where i.id = :ipId")
+    IpInfoDTO getIpDetails(@Param("ipId") Long ipId);
+
     Boolean existsIpAddressByIp(String ip);
 
 
